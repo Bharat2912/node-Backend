@@ -153,8 +153,9 @@ stages {
                 echo Docker Build
                 
                 echo Taging Image
-                docker tag test-app:latest 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend:latest
-                docker tag test-app:latest 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend-rollback:$Commit
+                docker build -t backend .
+                docker tag backend:latest 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend:latest
+                docker tag backend-rollback:latest 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend-rollback:$Commit
                 echo Remove old Image from ECR
                 aws ecr batch-delete-image --repository-name backend --image-ids imageTag=latest --region us-east-1
                 echo Pushing image ECR
@@ -169,7 +170,7 @@ stages {
                 
                 docker rmi -f 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend:latest
                 docker rmi -f 847280823661.dkr.ecr.us-east-1.amazonaws.com/backend-rollback:$Commit
-                docker rmi -f test-rollback:$Commit
+                docker rmi -f backend-rollback:$Commit
                 docker rmi -f backend:latest
                 '''
                 } 
