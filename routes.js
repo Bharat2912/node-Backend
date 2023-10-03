@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const data = [
-    { id: 1, name: 'Item 1 from Service' },
+    { id: 1, name: 'Bharat' },
     { id: 2, name: 'Item 2 from Service' },
     { id: 3, name: 'Item 3 from Service' }
 ];
